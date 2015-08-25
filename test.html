@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+input{outline:none;}
+	.input_error{border:1px solid red; box-shadow: 0 0 1px red;}
+</style>
+</head>
+
+<script>
+function error (obj,max,min){
+	obj.className='';
+	var str=obj.value;
+	var len=0;
+	for(var i=0; i<str.length; i++){
+		var char=str.charAt(i);
+		if(char>="\u4e00" && char <="\u9fa5"){
+			len +=3;
+		}else{
+			len ++;
+		}
+	}
+	if(len<min || len>max){
+		obj.className="input_error";
+	}
+ }
+	window.onload=function(){
+		var oTxt=document.getElementById("txt1");
+		oTxt.onblur=function(){
+			var _this=this;
+			error(_this);
+		}
+
+		oTxt.onkeyup=function(){
+			var _this=this;
+			error(_this,30,4);
+		}
+	};
+</script>
+<body>
+<input class="" type="text"  id="txt1" value="" format="^.{2,10}$" formatmsg="请输入2-10字" />
+</body>
+</html>
